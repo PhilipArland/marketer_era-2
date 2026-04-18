@@ -100,6 +100,10 @@ function handlePageScripts(page) {
         case 'settings.html':
             scriptSrc = 'assets/js/settings.js';
             break;
+
+        case 'email.html':
+            scriptSrc = 'assets/js/email.js';
+            break;
     }
 
     if (!scriptSrc) return;
@@ -111,9 +115,10 @@ function handlePageScripts(page) {
     script.onload = () => {
         if (page === 'dashboard.html' && typeof initDashboard === "function") {
             initDashboard();
-        } 
-        else if (page === 'settings.html' && typeof initSettings === "function") {
+        } else if (page === 'settings.html' && typeof initSettings === "function") {
             initSettings();
+        } else if (page === 'email.html' && typeof initEmail === "function") {
+            initEmail();
         }
     };
 
