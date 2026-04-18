@@ -35,12 +35,12 @@ function updateClock() {
     });
 
     const hour = now.getHours();
-    let tod = "morning";
+    let tod = "Morning";
 
     if (hour >= 12 && hour < 18) {
-        tod = "afternoon";
+        tod = "Afternoon";
     } else if (hour >= 18) {
-        tod = "evening";
+        tod = "Evening";
     }
 
     if (todEl) todEl.textContent = tod;

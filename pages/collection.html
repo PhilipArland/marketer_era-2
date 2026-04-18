@@ -1,1 +1,62 @@
-<h1>Test</h1>
+<div class="container-fluid p-2 px-md-3">
+    <header class="topbar p-2">
+        <div class="topbar-l">
+            <button class="hamburger" onclick="toggleSidebar()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="content p-0 pt-3">
+
+        <!-- PROFILE CARD -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-head-l">
+                    <div class="ci s">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+                    <span class="card-title">Ez Collection</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="fpair">
+                    <div class="field">
+                        <div class="flbl">Country</div>
+                        <input class="form-control fin" id="col-country" placeholder="Enter Country" />
+                    </div>
+
+                    <div class="field">
+                        <div class="flbl">Market Segment</div>
+                        <input class="form-control fin" id="col-segment" placeholder="Enter Market Segment" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="flbl">Cities (1 per line)</div>
+                    <textarea class="form-control fin" id="city-input" rows="6"
+                        placeholder="Enter cities separated by new line..."></textarea>
+
+                    <button class="btn bg-primary-subtle w-100 mt-2" onclick="generateCities()">
+                        Generate Cities
+                    </button>
+                </div>
+                <div class="progress mb-3 custom-progress">
+                    <div class="progress-bar" role="progressbar">0%</div>
+                </div>
+
+                <div id="citylist" class="city-list"></div>
+                
+                <div class="field">
+                    <div class="flbl">Generated Message</div>
+                    <textarea class="form-control fin" id="generated-message" rows="3" readonly></textarea>
+
+                    <button class="btn bg-success-subtle w-100 mt-2" onclick="copyMessage()">
+                        <i class="bi bi-clipboard"></i> Copy Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

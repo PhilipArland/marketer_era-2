@@ -536,7 +536,7 @@ body {
     padding: 12px 16px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 15px;
-    font-weight: 600;
+    /* font-weight: 600; */
     color: var(--text);
     outline: none;
     transition: all .2s ease;
@@ -859,6 +859,73 @@ body {
     background: #198754;
     color: white;
     cursor: pointer;
+}
+
+.custom-progress {
+    height: 25px !important;
+    background: #eef2f7;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.custom-progress .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #fde2d1, #f8c9a6);
+    font-size: 14px;
+    color: black;
+    transition: width 0.3s ease;
+}
+
+.city-list {
+    display: flex;
+    flex-direction: column;
+
+    height: 200px;
+    overflow-y: auto;
+    background: var(--surface);
+}
+
+/* each row */
+.city-list .form-check {
+    background: #f8fafc;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    margin-bottom: 4px;
+    padding: 0px 40px;
+}
+
+/* hover */
+.city-list .form-check:hover {
+    background: #eef4ff;
+    border-color: #d6e4ff;
+}
+
+/* label */
+.city-list .form-check-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* checkbox */
+.city-list input[type="checkbox"] {
+    transform: scale(1.4);
+    cursor: pointer;
+}
+
+/* checked state */
+.city-list input[type="checkbox"]:checked+span,
+.city-list input[type="checkbox"]:checked {
+    accent-color: #4f8cff;
+}
+
+/* completed city highlight */
+.city-list .form-check.completed {
+    background: #e6f4ea;
+    border-color: #b7e1c1;
 }
 
 @media(max-width:1100px) {

@@ -108,6 +108,14 @@ function handlePageScripts(page) {
         case 'webmail.html':
             scriptSrc = 'assets/js/webmail.js';
             break;
+
+        case 'collection.html':
+            scriptSrc = 'assets/js/collection.js';
+            break;
+
+        case 'helper.html':
+            scriptSrc = 'assets/js/helper.js';
+            break;
     }
 
     if (!scriptSrc) return;
@@ -125,6 +133,10 @@ function handlePageScripts(page) {
             initEmail();
         } else if (page === 'webmail.html' && typeof initWebmail === "function") {
             initWebmail();
+        } else if (page === 'collection.html' && typeof initCollection === "function") {
+            initCollection();
+        } else if (page === 'helper.html' && typeof initHelper === "function") {
+            initHelper();
         }
     };
 
@@ -182,3 +194,10 @@ function showAppAlert(message, type = "success") {
 function closeAppAlert() {
     document.getElementById("appAlert").classList.add("hidden");
 }
+
+document.getElementById("appAlert").addEventListener("click", function (e) {
+    // only close if clicking the background, not the box
+    if (e.target === this) {
+        closeAppAlert();
+    }
+});
