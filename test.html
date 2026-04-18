@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ez Report — Philip</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link href="assets/img/4.png" rel="icon">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <div id="sidebar-container"></div>
+
+    <div class="main-wrap">
+        <header class="topbar">
+            <div class="topbar-l">
+                <button class="hamburger" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+                <div class="greet">
+                    <h1>Good <span id="tod">morning</span>, Philip 👋</h1>
+                    <p><span class="chip">🗓 Goal: April 15</span><span id="daysLine">6 working days left!</span></p>
+                </div>
+            </div>
+            <div class="clock-card">
+                <div class="clock-date" id="cDate">April 3, 2026</div>
+                <div class="clock-time" id="cTime">--:--:-- --</div>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="page-bar">
+
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab(this,'Collection')">Collection</button>
+                    <button class="tab" onclick="switchTab(this,'Emails')">Emails</button>
+                    <button class="tab" onclick="switchTab(this,'Webmails')">Webmails</button>
+                    <button class="tab rst" onclick="resetForm()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <polyline points="23 4 23 10 17 10" />
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                        </svg>Reset
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div>
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="card-head-l">
+                                <div class="ci s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                        <polyline points="9 22 9 12 15 12 15 22" />
+                                    </svg></div>
+                                <span class="card-title">Company Collection</span>
+                            </div>
+                            <button class="add-btn">+</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="field">
+                                <div class="flbl">Country
+                                    <button class="flbl-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg></button>
+                                </div>
+                                <input class="fin" id="f_country" placeholder="e.g. Philippines" oninput="render()" />
+                            </div>
+                            <div class="field">
+                                <div class="flbl">Market Segment</div>
+                                <input class="fin" id="f_segment" placeholder="e.g. B2B SaaS, Healthcare…"
+                                    oninput="render()" />
+                            </div>
+                            <div class="fpair">
+                                <div class="field">
+                                    <div class="flbl">Company Names</div><input class="fin mono" id="f_names"
+                                        type="number" min="0" placeholder="0" oninput="render()" />
+                                </div>
+                                <div class="field">
+                                    <div class="flbl">Company Emails</div><input class="fin mono" id="f_emails"
+                                        type="number" min="0" placeholder="0" oninput="render()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="animation-delay:.07s">
+                        <div class="card-head">
+                            <div class="card-head-l">
+                                <div class="ci t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                                    </svg></div>
+                                <span class="card-title">Responses</span>
+                            </div>
+                            <span class="badge t">Tracking</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="fpair">
+                                <div class="field">
+                                    <div class="flbl">Emails Received</div><input class="fin mono" id="f_recv"
+                                        type="number" min="0" placeholder="0" oninput="render()" />
+                                </div>
+                                <div class="field">
+                                    <div class="flbl">Not Interested</div><input class="fin mono" id="f_noint"
+                                        type="number" min="0" placeholder="0" oninput="render()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rcard">
+                    <div class="card-head">
+                        <div class="card-head-l">
+                            <div class="ci s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" />
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                </svg></div>
+                            <span class="card-title">Generated Report</span>
+                        </div>
+                        <span class="badge s">Live</span>
+                    </div>
+                    <div class="rout" id="reportOut"></div>
+                    <div class="ract">
+                        <button class="btn-main" onclick="copyReport()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" />
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                            </svg>
+                            Copy Report
+                        </button>
+                        <button class="btn-sec" onclick="resetForm()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <polyline points="23 4 23 10 17 10" />
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+                            </svg>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast" id="toast">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12" />
+        </svg>
+        Copied to clipboard!
+    </div>
+
+    <script>
+        function p(n) { return String(n).padStart(2, '0'); }
+        function tick() {
+            const n = new Date(), M = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            document.getElementById('cDate').textContent = M[n.getMonth()] + ' ' + n.getDate() + ', ' + n.getFullYear();
+            let h = n.getHours(), m = n.getMinutes(), s = n.getSeconds(), ap = h >= 12 ? 'PM' : 'AM';
+            h = h % 12 || 12;
+            document.getElementById('cTime').textContent = p(h) + ':' + p(m) + ':' + p(s) + ' ' + ap;
+            document.getElementById('tod').textContent = n.getHours() < 12 ? 'morning' : n.getHours() < 17 ? 'afternoon' : 'evening';
+        }
+        tick(); setInterval(tick, 1000);
+
+        (function () {
+            const today = new Date(), dl = new Date('2026-04-15'), st = new Date('2026-04-01');
+            const pct = Math.round(Math.min(100, Math.max(0, (today - st) / (dl - st) * 100)));
+            let left = 0, d = new Date(today); d.setDate(d.getDate() + 1);
+            while (d <= dl) { if (d.getDay() && d.getDay() !== 6) left++; d.setDate(d.getDate() + 1); }
+            setTimeout(() => { document.getElementById('progFill').style.width = pct + '%'; document.getElementById('pctTxt').textContent = pct + '%'; }, 200);
+            const s = left + ' working day' + (left !== 1 ? 's' : '') + ' until payday 💰';
+            document.getElementById('progDays').textContent = s;
+            document.getElementById('daysLine').textContent = left + ' working day' + (left !== 1 ? 's' : '') + ' left before payday!';
+        })();
+
+        function setActive(el) { document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); if (window.innerWidth < 768) closeSidebar(); }
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('open'); }
+        function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
+
+        let activeTab = 'Collection';
+        function switchTab(btn, name) { document.querySelectorAll('.tab:not(.rst)').forEach(b => b.classList.remove('active')); btn.classList.add('active'); activeTab = name; render(); }
+
+        function g(id) { return document.getElementById(id).value.trim(); }
+        function render() {
+            const n = new Date(), M = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const ds = M[n.getMonth()] + ' ' + n.getDate() + ', ' + n.getFullYear();
+            const country = g('f_country') || '—', segment = g('f_segment') || '—';
+            const names = g('f_names') || '0', emails = g('f_emails') || '0';
+            const recv = g('f_recv') || '0', noint = g('f_noint') || '0';
+            function row(k, v) { const e = (v === '0' || v === '—') ? ' e' : ''; return `<div class="ro-row"><span class="ro-key">${k}</span><span class="ro-val${e}">${v}</span></div>`; }
+            document.getElementById('reportOut').innerHTML = `
+<div class="ro-date">📅 ${ds}</div>
+<div class="ro-head">COMPANY NAME ${activeTab.toUpperCase()}</div>
+${row('Country:', country)}${row('Market Segment:', segment)}${row('No. of Collected Names:', names)}${row('No. of Collected Emails:', emails)}
+<hr class="ro-hr"/>
+<div class="ro-stat"><div class="ro-dot g"></div><span class="ro-key">Emails Received:</span><span class="ro-val">${recv}</span></div>
+<div class="ro-stat"><div class="ro-dot o"></div><span class="ro-key">Not Interested:</span><span class="ro-val">${noint}</span></div>
+<hr class="ro-hr"/>
+<div class="ro-sign">Thank you.<br><br><strong>— Philip</strong></div>`.trim();
+        }
+        render();
+
+        function resetForm() {
+            ['f_country', 'f_segment', 'f_names', 'f_emails', 'f_recv', 'f_noint'].forEach(id => document.getElementById(id).value = '');
+            render();
+            document.querySelectorAll('.fin').forEach(el => { el.style.borderColor = 'rgba(192,98,46,0.45)'; el.style.background = 'rgba(192,98,46,0.04)'; setTimeout(() => { el.style.borderColor = ''; el.style.background = ''; }, 650); });
+        }
+
+        function copyReport() {
+            const n = new Date(), M = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const lines = [M[n.getMonth()] + ' ' + n.getDate() + ', ' + n.getFullYear(), '', 'COMPANY NAME ' + activeTab.toUpperCase(), 'Country: ' + (g('f_country') || '—'), 'Market Segment: ' + (g('f_segment') || '—'), 'No. of Collected Company Names: ' + (g('f_names') || '0'), 'No. of Collected Company Emails: ' + (g('f_emails') || '0'), '', 'Emails Received: ' + (g('f_recv') || '0'), 'Not Interested: ' + (g('f_noint') || '0'), '', 'Thank you.', '', '— Philip'];
+            navigator.clipboard.writeText(lines.join('\n')).then(() => { const t = document.getElementById('toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); });
+        }
+    </script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

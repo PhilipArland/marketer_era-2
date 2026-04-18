@@ -1,0 +1,202 @@
+<div class="container-fluid p-2 px-md-3">
+    <header class="topbar p-2">
+        <div class="topbar-l">
+            <button class="hamburger" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+            <div class="greet">
+                <h1>Good <span id="tod">morning</span>, Philip 👋</h1>
+                <p><span class="chip">🗓 Goal: April 15</span><span id="daysLine">6 working days left!</span></p>
+            </div>
+        </div>
+        <div class="clock-card">
+            <div class="clock-date" id="cDate">April 3, 2026</div>
+            <div class="clock-time" id="cTime">--:--:-- --</div>
+        </div>
+    </header>
+
+    <main class="content pt-3">
+        <div class="page-bar">
+            <div class="tabs">
+                <button class="tab active" data-tab-btn="Collection" onclick="switchTab(this,'Collection')">
+                    <i class="bi bi-box-seam"></i> Collection
+                </button>
+
+                <button class="tab" data-tab-btn="Emails" onclick="switchTab(this,'Emails')">
+                    <i class="bi bi-envelope"></i> Emails
+                </button>
+
+                <button class="tab" data-tab-btn="Webmails" onclick="switchTab(this,'Webmails')">
+                    <i class="bi bi-chat-dots"></i> Webmails
+                </button>
+
+                <button class="tab rst" onclick="resetForm()">
+                    <i class="bi bi-arrow-clockwise"></i> Reset
+                </button>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div>
+                <!-- Collection Card -->
+                <div class="card" data-card="Collection">
+                    <div class="card-head">
+                        <div class="card-head-l">
+                            <div class="ci s">
+                                <i class="bi bi-house"></i>
+                            </div>
+                            <span class="card-title">Company Collection</span>
+                        </div>
+                        <button class="add-btn">+</button>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="field">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-globe"></i>
+                                </span>
+                                <input class="form-control form-control fin" id="col_country" placeholder="Country"
+                                    oninput="render()" />
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <input class="form-control fin" id="col_segment" placeholder="Market Segment" oninput="render()" />
+                        </div>
+
+                        <div class="field">
+                            <input class="form-control fin mono" id="col_names" type="number" min="0"
+                                placeholder="No. of Collected Company Names" oninput="render()" />
+                        </div>
+
+                        <div class="field">
+                            <input class="form-control fin mono" id="col_emails" type="number" min="0"
+                                placeholder="No. of Collected Company Emails" oninput="render()" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emails Card -->
+
+                <div class="card" data-card="Emails">
+                    <div class="card-head">
+                        <div class="card-head-l">
+                            <div class="ci s">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <span class="card-title">Sending Emails</span>
+                        </div>
+                        <button class="add-btn">+</button>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="field">
+                            <input class="form-control fin" id="f_country" placeholder="Country" oninput="render()" />
+                        </div>
+
+                        <div class="field">
+                            <input class="form-control fin" id="f_segment" placeholder="Market Segment" oninput="render()" />
+                        </div>
+
+                        <div class="field">
+                            <input class="form-control fin" id="f_product" placeholder="Product Line" oninput="render()" />
+                        </div>
+
+                        <div class="field">
+                            <input class="form-control fin mono" id="f_sentEmails" type="number" min="0"
+                                placeholder="No. of Sent Emails" oninput="render()" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Webmail Card -->
+
+                <div class="card" data-card="Webmails">
+                    <div class="card-head">
+                        <div class="card-head-l">
+                            <div class="ci s">
+                                <i class="bi bi-chat-dots"></i>
+                            </div>
+                            <span class="card-title">Sending Webmails</span>
+                        </div>
+                        <button class="add-btn">+</button>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="field">
+                            <input class="form-control fin" id="f_country" placeholder="Country" oninput="render()" />
+                        </div>
+
+                        <div class="field">
+                            <input class="form-control fin" id="f_segment" placeholder="Market Segment" oninput="render()" />
+                        </div>
+
+                        <div class="field">
+                            <input class="form-control fin" id="f_product" placeholder="Product Line" oninput="render()" />
+                        </div>
+
+                        <div class="field">
+                            <input class="form-control fin mono" id="f_sentEmails" type="number" min="0"
+                                placeholder="No. of Sent Emails" oninput="render()" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responses Card -->
+
+                <div class="card" style="animation-delay:.07s">
+                    <div class="card-head">
+                        <div class="card-head-l">
+                            <div class="ci t">
+                                <i class="bi bi-activity"></i>
+                            </div>
+                            <span class="card-title">Responses</span>
+                        </div>
+                        <span class="badge t">Tracking</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="fpair">
+                            <div class="field">
+                                <div class="flbl">Emails Received</div>
+                                <input class="form-control fin mono" id="f_recv" type="number" min="0" placeholder="0"
+                                    oninput="render()" />
+                            </div>
+
+                            <div class="field">
+                                <div class="flbl">Not Interested</div>
+                                <input class="form-control fin mono" id="f_noint" type="number" min="0" placeholder="0"
+                                    oninput="render()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rcard">
+                <div class="card-head">
+                    <div class="card-head-l">
+                        <div class="ci s">
+                            <i class="bi bi-clipboard"></i>
+                        </div>
+                        <span class="card-title">Generated Report</span>
+                    </div>
+                    <span class="badge s">Live</span>
+                </div>
+
+                <div class="rout" id="reportOut"></div>
+
+                <div class="ract">
+                    <button class="btn-main" onclick="copyReport()">
+                        <i class="bi bi-clipboard-check"></i>
+                        Copy Report
+                    </button>
+
+                    <button class="btn-sec" onclick="resetForm()">
+                        <i class="bi bi-arrow-clockwise"></i>
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
