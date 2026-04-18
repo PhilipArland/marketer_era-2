@@ -4,10 +4,6 @@
             <button class="hamburger" onclick="toggleSidebar()">
                 <span></span><span></span><span></span>
             </button>
-
-            <div class="greet">
-                <h1>Email 📧</h1>
-            </div>
         </div>
     </header>
 
@@ -18,45 +14,34 @@
             <div class="card-head">
                 <div class="card-head-l">
                     <div class="ci s">
-                        <i class="bi bi-person-circle"></i>
+                        <i class="bi bi-envelope"></i>
                     </div>
-                    <span class="card-title">User Profile</span>
+                    <span class="card-title">EZ Email</span>
                 </div>
             </div>
 
             <div class="card-body">
+
+                <button class="btn-main w-100 p-5 mb-3" onclick="addEmails()">
+                    + Add 50 Emails
+                </button>
 
                 <div class="field">
-                    <div class="flbl">Display Name</div>
-                    <input class="form-control fin" id="set_name" placeholder="Enter your name" />
-                </div>
-            </div>
-        </div>
-
-        <!-- ACTIONS -->
-        <div class="card">
-            <div class="card-head">
-                <div class="card-head-l">
-                    <div class="ci s">
-                        <i class="bi bi-save"></i>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <div class="flbl">Report</div>
+                        <div class="buttons">
+                            <button class="btn bg-primary-subtle" onclick="undoEmail()"><i class="bi bi-arrow-counterclockwise"></i> Undo</button>
+                            <button class="btn btn-danger" onclick="clearReport()"><i class="bi bi-trash"></i> Clear</button>
+                        </div>
                     </div>
-                    <span class="card-title">Actions</span>
+                    <textarea class="form-control fin" id="email_report" rows="4"></textarea>
+
+                    <button class="btn bg-success-subtle w-100 mt-2" onclick="copyToClipboard('email_report')">
+                        <i class="bi bi-clipboard"></i> Copy Report
+                    </button>
                 </div>
             </div>
-
-            <div class="card-body">
-
-                <button class="btn-main w-100" onclick="saveSettings()">
-                    <i class="bi bi-check-circle"></i>
-                    Save Settings
-                </button>
-
-                <button class="btn-sec w-100 mt-2" onclick="resetSettings()">
-                    <i class="bi bi-arrow-clockwise"></i>
-                    Reset
-                </button>
-
-            </div>
         </div>
+
     </main>
 </div>
