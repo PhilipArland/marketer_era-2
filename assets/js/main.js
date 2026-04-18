@@ -195,9 +195,22 @@ function closeAppAlert() {
     document.getElementById("appAlert").classList.add("hidden");
 }
 
-document.getElementById("appAlert").addEventListener("click", function (e) {
-    // only close if clicking the background, not the box
-    if (e.target === this) {
-        closeAppAlert();
-    }
-});
+let isGifRunning = false;
+
+function showRunGif() {
+    if (isGifRunning) return;
+
+    const el = document.getElementById("runGif");
+    if (!el) return;
+
+    isGifRunning = true;
+    el.classList.remove("hidden");
+
+    setTimeout(() => {
+        el.classList.add("hidden");
+        isGifRunning = false;
+    }, 5000);
+}
+
+// setInterval(showRunGif, 100);
+setInterval(showRunGif, 600000);
