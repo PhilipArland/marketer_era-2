@@ -104,6 +104,10 @@ function handlePageScripts(page) {
         case 'email.html':
             scriptSrc = 'assets/js/email.js';
             break;
+
+        case 'webmail.html':
+            scriptSrc = 'assets/js/webmail.js';
+            break;
     }
 
     if (!scriptSrc) return;
@@ -119,6 +123,8 @@ function handlePageScripts(page) {
             initSettings();
         } else if (page === 'email.html' && typeof initEmail === "function") {
             initEmail();
+        } else if (page === 'webmail.html' && typeof initWebmail === "function") {
+            initWebmail();
         }
     };
 

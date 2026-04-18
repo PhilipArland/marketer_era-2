@@ -4,29 +4,45 @@
 function initSettings() {
     console.log("Settings page initialized");
 
-    // load saved name
+    // NAME
     const savedName = localStorage.getItem("user_name");
-
     if (savedName) {
         const input = document.getElementById("set_name");
         if (input) input.value = savedName;
     }
-}
 
+    // SUBJECT
+    const savedSubject = localStorage.getItem("email_subject");
+    if (savedSubject) {
+        const subjectInput = document.getElementById("set_subject");
+        if (subjectInput) subjectInput.value = savedSubject;
+    }
+
+    // MESSAGE
+    const savedMessage = localStorage.getItem("email_message");
+    if (savedMessage) {
+        const messageInput = document.getElementById("set_message");
+        if (messageInput) messageInput.value = savedMessage;
+    }
+}
 
 // ==============================
 // 💾 SAVE SETTINGS
 // ==============================
 function saveSettings() {
-    const input = document.getElementById("set_name");
-    if (!input) return;
+    const nameInput = document.getElementById("set_name");
+    const subjectInput = document.getElementById("set_subject");
+    const messageInput = document.getElementById("set_message");
 
-    const name = input.value.trim();
+    const name = nameInput?.value.trim() || "";
+    const subject = subjectInput?.value || "";
+    const message = messageInput?.value || "";
 
-    // save to localStorage
+    // SAVE EVERYTHING
     localStorage.setItem("user_name", name);
+    localStorage.setItem("email_subject", subject);
+    localStorage.setItem("email_message", message);
 
-    // update sidebar instantly
     updateUserName(name);
 
     alert("Settings saved!");
