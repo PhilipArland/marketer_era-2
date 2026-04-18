@@ -806,6 +806,61 @@ body {
     display: block;
 }
 
+.app-alert {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.app-alert.hidden {
+    display: none;
+}
+
+.app-alert-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+    animation: pop .15s ease-out;
+}
+
+@keyframes pop {
+    from {
+        transform: scale(.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.app-alert-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.app-alert-msg {
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.app-alert-btn {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #198754;
+    color: white;
+    cursor: pointer;
+}
+
 @media(max-width:1100px) {
     .grid {
         grid-template-columns: 1fr;

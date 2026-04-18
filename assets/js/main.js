@@ -165,3 +165,20 @@ function updateUserName(name) {
 function getUserName() {
     return localStorage.getItem("user_name") || "User";
 }
+
+function showAppAlert(message, type = "success") {
+    const modal = document.getElementById("appAlert");
+    const msg = document.getElementById("appAlertMsg");
+    const icon = modal.querySelector(".app-alert-icon");
+
+    msg.textContent = message;
+
+    // simple icon switch
+    icon.textContent = type === "success" ? "✔" : "⚠";
+
+    modal.classList.remove("hidden");
+}
+
+function closeAppAlert() {
+    document.getElementById("appAlert").classList.add("hidden");
+}

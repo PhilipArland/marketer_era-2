@@ -23,18 +23,24 @@
             <div class="card-body">
                 <div class="field">
                     <div class="flbl">Company Name</div>
-                    <input class="form-control fin" id="set_company" placeholder="Enter your name" />
+                    <input class="form-control fin" id="set_company" placeholder="Enter Company Name here" />
                 </div>
 
                 <div class="field">
                     <div class="flbl">Email Subject</div>
                     <input class="form-control fin" id="set_subject" placeholder="Enter email subject" readonly />
+                    <button class="btn bg-success-subtle w-100 mt-2" onclick="copyToClipboard('set_subject')">
+                        <i class="bi bi-clipboard"></i> Copy Subject
+                    </button>
                 </div>
 
                 <div class="field">
                     <div class="flbl">Email Message</div>
                     <textarea class="form-control fin" id="set_message" rows="7"
                         placeholder="Enter email message" readonly></textarea>
+                    <button class="btn bg-success-subtle w-100 mt-2" onclick="copyToClipboard('set_message')">
+                        <i class="bi bi-clipboard"></i> Copy Message
+                    </button>
                 </div>
             </div>
         </div>

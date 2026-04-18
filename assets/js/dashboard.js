@@ -49,6 +49,24 @@ function updateClock() {
     if (userEl) userEl.textContent = name;
 }
 
+function copyToClipboard(id) {
+    const el = document.getElementById(id);
+    if (!el) {
+        showAppAlert("Nothing to copy!", "error");
+        return;
+    }
+
+    const text = el.innerText;
+
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            showAppAlert("Report copied!");
+        })
+        .catch(() => {
+            showAppAlert("Failed to copy!", "error");
+        });
+}
+
 // ==============================
 // 📑 CARD INIT (DEFAULT STATE)
 // ==============================
@@ -256,7 +274,6 @@ function render() {
         - ${getUserName()}
     `;
 }
-
 
 // ==============================
 // 🧰 HELPERS

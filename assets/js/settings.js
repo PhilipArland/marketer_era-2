@@ -45,7 +45,7 @@ function saveSettings() {
 
     updateUserName(name);
 
-    alert("Settings saved!");
+    showAppAlert("Settings saved!");
 }
 
 
