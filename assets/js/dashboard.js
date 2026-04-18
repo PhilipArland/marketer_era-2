@@ -17,14 +17,37 @@ function initClock() {
 function updateClock() {
     const timeEl = document.getElementById("cTime");
     const dateEl = document.getElementById("cDate");
-    if (!timeEl || !dateEl) return;
-    const now = new Date();
-    timeEl.textContent = now.toLocaleTimeString();
-    dateEl.textContent = now.toLocaleDateString(undefined, {
-        month: "long", day: "numeric", year: "numeric"
-    });
-}
+    const todEl = document.getElementById("tod");
+    const userEl = document.getElementById("userName");
 
+    if (!timeEl || !dateEl) return;
+
+    const now = new Date();
+
+    // ⏰ TIME
+    timeEl.textContent = now.toLocaleTimeString();
+
+    // 📅 DATE
+    dateEl.textContent = now.toLocaleDateString(undefined, {
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+    });
+
+    const hour = now.getHours();
+    let tod = "morning";
+
+    if (hour >= 12 && hour < 18) {
+        tod = "afternoon";
+    } else if (hour >= 18) {
+        tod = "evening";
+    }
+
+    if (todEl) todEl.textContent = tod;
+
+    const name = localStorage.getItem("user_name") || "User";
+    if (userEl) userEl.textContent = name;
+}
 
 // ==============================
 // 📑 CARD INIT (DEFAULT STATE)
@@ -230,7 +253,7 @@ function render() {
 
         Thank you.<br><br>
 
-        - User
+        - ${getUserName()}
     `;
 }
 

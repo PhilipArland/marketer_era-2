@@ -1,35 +1,43 @@
+// ==============================
+// 🚀 INIT APP
+// ==============================
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Load sidebar first
     fetch('includes/sidebar.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar-container').innerHTML = data;
 
-            // Attach sidebar events AFTER load
             initSidebar();
-        });
+            applySavedUser(); // 🔥 APPLY SAVED NAME
 
-    // Load default page
-    loadPage('dashboard.html');
+            // restore last page OR default
+            const lastPage = localStorage.getItem("lastPage") || "dashboard.html";
+            loadPage(lastPage);
+        });
 });
 
 
-// ✅ Page loader (GLOBAL)
+// ==============================
+// 📄 PAGE LOADER
+// ==============================
 function loadPage(page) {
     const container = document.getElementById('main-content');
-    container.innerHTML = "Loading...";
+    if (!container) return;
+
+    // save last page
+    localStorage.setItem("lastPage", page);
 
     fetch('pages/' + page)
         .then(res => {
             if (!res.ok) throw new Error("Page not found");
             return res.text();
         })
-        .then(data => {
-            container.innerHTML = data;
+        .then(html => {
+            container.innerHTML = html;
 
-            // 🔥 Load page-specific JS
             handlePageScripts(page);
+            updateActiveSidebar(page);
         })
         .catch(err => {
             container.innerHTML = "<h2>Error loading page</h2>";
@@ -38,10 +46,47 @@ function loadPage(page) {
 }
 
 
-// ✅ Handles per-page JS loading
+// ==============================
+// 📌 SIDEBAR INIT
+// ==============================
+function initSidebar() {
+    const buttons = document.querySelectorAll('.nav-btn');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const page = this.getAttribute('data-page');
+            if (!page) return;
+
+            loadPage(page);
+        });
+    });
+
+    const lastPage = localStorage.getItem("lastPage") || "dashboard.html";
+    updateActiveSidebar(lastPage);
+}
+
+
+// ==============================
+// 🔥 ACTIVE STATE HANDLER
+// ==============================
+function updateActiveSidebar(page) {
+    const buttons = document.querySelectorAll('.nav-btn');
+
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+
+        if (btn.getAttribute("data-page") === page) {
+            btn.classList.add("active");
+        }
+    });
+}
+
+
+// ==============================
+// 📦 PAGE SCRIPTS LOADER
+// ==============================
 function handlePageScripts(page) {
 
-    // Remove old page scripts (prevents duplicates)
     const oldScript = document.getElementById('page-script');
     if (oldScript) oldScript.remove();
 
@@ -52,10 +97,9 @@ function handlePageScripts(page) {
             scriptSrc = 'assets/js/dashboard.js';
             break;
 
-        // future pages here
-        // case 'reports.html':
-        //     scriptSrc = 'assets/js/reports.js';
-        //     break;
+        case 'settings.html':
+            scriptSrc = 'assets/js/settings.js';
+            break;
     }
 
     if (!scriptSrc) return;
@@ -65,9 +109,11 @@ function handlePageScripts(page) {
     script.id = 'page-script';
 
     script.onload = () => {
-        // Call init function safely
-        if (typeof initDashboard === "function" && page === 'dashboard.html') {
+        if (page === 'dashboard.html' && typeof initDashboard === "function") {
             initDashboard();
+        } 
+        else if (page === 'settings.html' && typeof initSettings === "function") {
+            initSettings();
         }
     };
 
@@ -75,24 +121,36 @@ function handlePageScripts(page) {
 }
 
 
-// ✅ Sidebar logic
-function initSidebar() {
-    const buttons = document.querySelectorAll('.nav-btn');
+// ==============================
+// 👤 APPLY SAVED USER (GLOBAL)
+// ==============================
+function applySavedUser() {
+    const savedName = localStorage.getItem("user_name");
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', function () {
+    const userNameEl = document.querySelector(".user-name");
+    const avatar = document.querySelector(".user-ava");
 
-            // Remove active from all
-            buttons.forEach(b => b.classList.remove('active'));
+    if (savedName) {
+        if (userNameEl) userNameEl.textContent = savedName;
+        if (avatar) avatar.textContent = savedName.charAt(0).toUpperCase();
+    } else {
+        if (userNameEl) userNameEl.textContent = "User";
+        if (avatar) avatar.textContent = "U";
+    }
+}
 
-            // Add active to clicked
-            this.classList.add('active');
 
-            const page = this.getAttribute('data-page');
+// ==============================
+// 🔄 UPDATE USER (REAL-TIME)
+// ==============================
+function updateUserName(name) {
+    const userNameEl = document.querySelector(".user-name");
+    const avatar = document.querySelector(".user-ava");
 
-            if (page) {
-                loadPage(page);
-            }
-        });
-    });
+    if (userNameEl) userNameEl.textContent = name || "User";
+    if (avatar) avatar.textContent = name ? name.charAt(0).toUpperCase() : "U";
+}
+
+function getUserName() {
+    return localStorage.getItem("user_name") || "User";
 }

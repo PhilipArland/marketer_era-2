@@ -1,0 +1,62 @@
+<div class="container-fluid p-2 px-md-3">
+    <header class="topbar p-2">
+        <div class="topbar-l">
+            <button class="hamburger" onclick="toggleSidebar()">
+                <span></span><span></span><span></span>
+            </button>
+
+            <div class="greet">
+                <h1>Settings ⚙️</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="content pt-3">
+
+        <!-- PROFILE CARD -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-head-l">
+                    <div class="ci s">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <span class="card-title">User Profile</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <div class="field">
+                    <div class="flbl">Display Name</div>
+                    <input class="form-control fin" id="set_name" placeholder="Enter your name" />
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-head-l">
+                    <div class="ci s">
+                        <i class="bi bi-save"></i>
+                    </div>
+                    <span class="card-title">Actions</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+
+                <button class="btn-main w-100" onclick="saveSettings()">
+                    <i class="bi bi-check-circle"></i>
+                    Save Settings
+                </button>
+
+                <button class="btn-sec w-100 mt-2" onclick="resetSettings()">
+                    <i class="bi bi-arrow-clockwise"></i>
+                    Reset
+                </button>
+
+            </div>
+        </div>
+    </main>
+</div>
